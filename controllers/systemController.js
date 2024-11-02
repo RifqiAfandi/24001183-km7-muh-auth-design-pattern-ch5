@@ -20,7 +20,7 @@ function onLost(req, res, next) {
         message: "API not found",
         isSuccess: false,
     });
-}
+};
 
 module.exports = {
     healthCheck,

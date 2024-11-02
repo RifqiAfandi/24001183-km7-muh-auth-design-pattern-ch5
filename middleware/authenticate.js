@@ -15,7 +15,7 @@ const auth = (roles) => {
             const token = bearerToken.split("Bearer ")[1];
             const payload = jwt.verify(token, process.env.JWT_SECRET);
             const user = await User.findByPk(payload.id);
-            if (user.role != roles){
+            if (!roles.includes(user.role)){
                 return res.status(403).json({
                     status: "Failed",
                     msg: "Access denied",

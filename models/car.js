@@ -33,9 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      validate: {
-        min: 1000000
-      }
     },
     available: {
       type: DataTypes.BOOLEAN,
@@ -50,11 +47,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     deletedBy: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     deletedAt: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.DATE,
     },
     
   }, {

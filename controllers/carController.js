@@ -29,7 +29,7 @@ async function getAllCars(req, res) {
             },
         });
     } catch (err) {
-        return res.status(500).json({
+        res.status(500).json({
             status: "Failed",
             message: err.message,
             isSuccess: false,
@@ -43,97 +43,134 @@ async function getCarbyId(req, res) {
         const car = await Car.findByPk(id);
         if (!car) {
             return res.status(404).json({
-                status: "Fail",
+                status: "Failed",
                 message: "Car not found",
                 isSuccess: false,
-                data: null,
             });
         }
-        res.render("cars/detail", { car });
-    } catch (error) {
-        return res.status(500).json({
-            status: "Fail",
-            message: error.message,
+        res.status(200).json({
+            status: "Success",
+            message: `Success get car with id : ${id}`,
+            isSuccess: true,
+            data: {
+                car
+            }
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: "Failed",
+            message: err.message,
             isSuccess: false,
-            data: null,
         });
     }
-}
-
-async function updateCar(req, res) {
-    try {
-        const id = req.params.id;
-        const { model, tahun, no_plat, status, harga } = req.body;
-        const detailCar = await Car.findByPk(id);
-        if (!detailCar) {
-            return res.status(404).sendFile(path.join(__dirname, "../views/errors", "404.html"));
-        }
-        if (req.file) {
-            const file = req.file;
-            const split = file.originalname.split(".");
-            const ext = split[split.length - 1];
-            
-            const uploadedImage = await imagekit.upload({
-                file: file.buffer,
-                fileName: `${split[0]}-${Date.now()}.${ext}`
-            })
-            if (!uploadedImage) {
-                return res.status(400).sendFile(path.join(__dirname, "../views/errors", "400.html"));
-            }
-            detailCar.model = model,
-            detailCar.tahun = tahun,
-            detailCar.no_plat = no_plat,
-            detailCar.status = status,
-            detailCar.harga = harga,
-            detailCar.foto_mobil = uploadedImage.url
-        }
-        else{
-            detailCar.model = model,
-            detailCar.tahun = tahun,
-            detailCar.no_plat = no_plat,
-            detailCar.status = status,
-            detailCar.harga = harga
-        }
-        await detailCar.save();
-        res.redirect("/dashboard/cars");
-    }
-    catch (error) {
-        return res.status(500).sendFile(path.join(__dirname, "../views/errors", "500.html"));
-    }
-}
+};
 
 async function createCar(req, res) {
     try {
-        const file = req.file;
-        const split = file.originalname.split(".");
-        const ext = split[split.length - 1];
-        const { model, tahun, no_plat, status, harga } = req.body;
-
-        const uploadedImage = await imagekit.upload({
-            file: file.buffer,
-            fileName: `${split[0]}-${Date.now()}.${ext}`,
-        });
-        if (!uploadedImage) {
-            return res
-                .status(400)
-                .sendFile(path.join(__dirname, "../views/errors", "400.html"));
-        }
-
-        const newCar = await Car.create({
+        const {
             model,
-            tahun,
-            no_plat,
-            status,
-            harga,
-            foto_mobil: uploadedImage.url,
+            brand,
+            year,
+            number,
+            price,
+            available,
+        } = req.body;
+        const car = await Car.create({
+            model,
+            brand,
+            year,
+            number,
+            price,
+            available,
+            createdBy: req.user.name,
+            lastUpdatedBy: req.user.name,
+            deletedBy: null,
+            deletedAt: null,
         });
-        res.redirect("/dashboard/cars");
-    } catch (error) {
-        res
-            .status(500)
-            .sendFile(path.join(__dirname, "../views/errors", "500.html"));
+        if (!model || !brand || !year || !number || !price || !available){
+            return res.status(400).json({
+                status: "Failed",
+                message: "Model, Brand, Year, Number, Price and Available are required",
+                isSuccess: false,
+            });
+        };
+        if (price < 1000000){
+            return res.status(400).json({
+                status: "Failed",
+                message: "Minimum price is above 1,000,000",
+                isSuccess: false,
+            });
+        }
+        res.status(201).json({
+            status: "Success",
+            message: "Success create car",
+            isSusccess: true,
+            data: {
+                car
+            },
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: "Failed",
+            message: err.message,
+            isSuccess: false,
+        });
     }
-}
+};
+
+async function updateCar(req, res) {
+    const id = req.params.id;
+    const {
+        model, 
+        brand, 
+        year, 
+        number, 
+        price, 
+        available,
+    } = req.body;
+    try {
+        const car = await Car.findOne({
+            where: {
+                id,
+            },
+        });
+        if (!car) {
+            res.status(404).json({
+                status: "Failed",
+                message: "Car not found",
+                isSuccess: false,
+            });
+        }
+        await Products.update({
+            model, 
+            brand, 
+            year, 
+            number, 
+            price, 
+            available, 
+        });
+  
+      res.status(200).json({
+        status: "Success",
+        message: "Success update product",
+        isSuccess: true,
+        data: {
+          product: {
+            id,
+            name,
+            stock,
+            price,
+          },
+        },
+      });
+    } catch (err) {
+        res.status(500).json({
+            status: "Failed",
+            message: err.message,
+            isSuccess: false,
+        });
+    }
+};
 
 async function deleteCar(req, res) {
     try {
@@ -159,12 +196,12 @@ async function deleteCar(req, res) {
             data: null,
         });
     }
-}
+};
 
 module.exports = {
-    updateCar,
-    createCar,
     getAllCars,
     getCarbyId,
+    createCar,
+    updateCar,
     deleteCar,
 };
