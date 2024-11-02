@@ -24,10 +24,19 @@ module.exports = {
       price: {
         type: Sequelize.BIGINT
       },
+      available: {
+        type: Sequelize.BOOLEAN
+      },
       createdBy: {
         type: Sequelize.STRING
       },
       lastUpdatedBy: {
+        type: Sequelize.STRING
+      },
+      deletedBy: {
+        type: Sequelize.STRING
+      },
+      deletedAt: {
         type: Sequelize.STRING
       },
       createdAt: {

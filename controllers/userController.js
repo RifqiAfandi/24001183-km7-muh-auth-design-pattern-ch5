@@ -156,22 +156,8 @@ const createAdmin = async (req, res) => {
     }
 };
 
-const authenticate = async (req, res) => {
-    try {
-        res.status(200).json({
-            status: "Success",
-            data: {
-                user: req.user,
-            },
-        });
-    } catch (err) {
-
-    }
-};
-
 module.exports = {
     register,
     login,
     createAdmin,
-    authenticate,
 };

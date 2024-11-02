@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
         min: 1000000
       }
     },
+    available: {
+      type: DataTypes.BOOLEAN,
+    },
     createdBy: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -45,6 +48,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    deletedBy: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    deletedAt: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    
   }, {
     sequelize,
     modelName: 'Car',

@@ -15,7 +15,7 @@ module.exports = {
       {
         name: 'SuperAdmin',
         age: 20,
-        role: 'Super admin',
+        role: 'Super Admin',
         email: 'super.admin@example.com',
         password: hashedPasswords[0],
         createdAt: new Date(),
@@ -24,7 +24,7 @@ module.exports = {
       {
         name: 'Admin',
         age: 20,
-        role: 'admin',
+        role: 'Admin',
         email: 'admin@example.com',
         password: hashedPasswords[1],
         createdAt: new Date(),
