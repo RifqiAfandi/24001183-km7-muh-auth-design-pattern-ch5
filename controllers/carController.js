@@ -75,18 +75,6 @@ async function createCar(req, res) {
             price,
             available,
         } = req.body;
-        const car = await Car.create({
-            model,
-            brand,
-            year,
-            number,
-            price,
-            available,
-            createdBy: req.user.name,
-            lastUpdatedBy: req.user.name,
-            deletedBy: null,
-            deletedAt: null,
-        });
         if (!model || !brand || !year || !number || !price || !available){
             return res.status(400).json({
                 status: "Failed",
@@ -100,7 +88,19 @@ async function createCar(req, res) {
                 message: "Minimum price is above 1,000,000",
                 isSuccess: false,
             });
-        }
+        };
+        const car = await Car.create({
+            model,
+            brand,
+            year,
+            number,
+            price,
+            available,
+            createdBy: req.user.name,
+            lastUpdatedBy: req.user.name,
+            deletedBy: null,
+            deletedAt: null,
+        });
         res.status(201).json({
             status: "Success",
             message: "Success create car",
@@ -119,16 +119,16 @@ async function createCar(req, res) {
 };
 
 async function updateCar(req, res) {
-    const id = req.params.id;
-    const {
-        model, 
-        brand, 
-        year, 
-        number, 
-        price, 
-        available,
-    } = req.body;
     try {
+        const id = req.params.id;
+        const {
+            model, 
+            brand, 
+            year, 
+            number, 
+            price, 
+            available,
+        } = req.body;
         const car = await Car.findOne({
             where: {
                 id,
@@ -141,7 +141,7 @@ async function updateCar(req, res) {
                 isSuccess: false,
             });
         }
-        await Products.update({
+        await Car.update({
             model, 
             brand, 
             year, 
