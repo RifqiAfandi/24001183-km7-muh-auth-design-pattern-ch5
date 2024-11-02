@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { where } = require('sequelize');
 
 const register = async (req, res, next) => {
-    const { name, age, email, password} = req.body;
+    const { name, age, role, email, password} = req.body;
     try {
         const validateEmail = await User.findOne({
             where: {
@@ -31,6 +31,7 @@ const register = async (req, res, next) => {
         const user = await User.create({
             name,
             age,
+            role: "Member",
             email,
             password:hashedPassword,
         });
@@ -106,6 +107,55 @@ const login = async (req, res, next) => {
     }
 };
 
+const createAdmin = async (req, res) => {
+    const { name, age, role, email, password } = req.body; 
+    try {
+        const validateEmail = await User.findOne({
+            where: {
+                email
+            }
+        });
+        if (validateEmail){
+            return res.status(400).json({
+                status: "Failed",
+                message: "Email already exist",
+                isSuccess: false
+            });
+        };
+        if (!password || password.length < 6) {
+            return res.status(400).json({
+                status: "Failed",
+                message: "Password must be more than 6 char",
+                isSuccess: false
+            });
+        };
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await User.create({
+            name,
+            age,
+            role: "Admin",
+            email,
+            password:hashedPassword,
+        });
+        res.status(201).json({
+            status: "Success",
+            message: "Success create admin",
+            isSusccess: true,
+            data: {
+                username: user.name,
+                age: user.age,
+                role: user.role,
+                email: user.email,
+            },
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
+    }
+};
+
 const authenticate = async (req, res) => {
     try {
         res.status(200).json({
@@ -122,5 +172,6 @@ const authenticate = async (req, res) => {
 module.exports = {
     register,
     login,
+    createAdmin,
     authenticate,
 };
