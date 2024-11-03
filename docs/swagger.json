@@ -1,0 +1,1653 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Challange 5 - Auth Design Pattern",
+    "description": "This collection contains API endpoints to manage cars and handle user authentication for the Binar Academy project. It includes endpoints for managing car records, user authentication (login, registration), and user role management (Member, Admin, Super Admin). The collection is structured according to an authorization design pattern, utilizing Bearer Tokens for secure access control and to restrict access to specific endpoints based on user roles.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://{{base_url}}"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Cars",
+      "description": "Cars endpoints in this folder are designed for car data management."
+    },
+    {
+      "name": "Users",
+      "description": "This folder includes endpoints for user management and is divided by user roles (Member, Admin, and Super Admin) to support access control."
+    },
+    {
+      "name": "Users > Member",
+      "description": "Endpoints for regular users (members) to manage their accounts and authentication."
+    },
+    {
+      "name": "Users > Admin",
+      "description": "Endpoints for admin users, who have elevated privileges for managing system resources."
+    },
+    {
+      "name": "Users > Super Admin",
+      "description": "Endpoints for super admin users with the highest level of access, including the ability to manage admin accounts."
+    },
+    {
+      "name": "System",
+      "description": "System-level endpoints to perform general health checks and handle other system-wide operations."
+    }
+  ],
+  "paths": {
+    "/cars/": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Get All Available Cars",
+        "description": "Retrieves only the cars that are currently available.",
+        "parameters": [
+          {
+            "name": "available",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "example": "true"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "1218"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"4c2-iMXIv85LkgbLcyTvL8gcc4LAw3E\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 19:59:52 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success get data all cars",
+                  "isSusccess": true,
+                  "data": {
+                    "totalData": 9,
+                    "totalPages": 2,
+                    "currentPages": "2",
+                    "cars": [
+                      {
+                        "id": 7,
+                        "model": "CR-V",
+                        "brand": "Honda",
+                        "year": 2022,
+                        "number": "B1718PQR",
+                        "price": "40000000",
+                        "available": true,
+                        "createdBy": "Admin",
+                        "lastUpdatedBy": "Admin",
+                        "deletedBy": null,
+                        "deletedAt": null,
+                        "createdAt": "2024-11-02T19:01:13.908Z",
+                        "updatedAt": "2024-11-02T19:01:13.908Z"
+                      },
+                      {
+                        "id": 8,
+                        "model": "Altis",
+                        "brand": "Toyota",
+                        "year": 2020,
+                        "number": "B1920STU",
+                        "price": "28000000",
+                        "available": true,
+                        "createdBy": "Admin",
+                        "lastUpdatedBy": "Admin",
+                        "deletedBy": null,
+                        "deletedAt": null,
+                        "createdAt": "2024-11-02T19:01:13.908Z",
+                        "updatedAt": "2024-11-02T19:01:13.908Z"
+                      },
+                      {
+                        "id": 9,
+                        "model": "Outlander",
+                        "brand": "Mitsubishi",
+                        "year": 2018,
+                        "number": "B2122VWX",
+                        "price": "22000000",
+                        "available": true,
+                        "createdBy": "Admin",
+                        "lastUpdatedBy": "Admin",
+                        "deletedBy": null,
+                        "deletedAt": null,
+                        "createdAt": "2024-11-02T19:01:13.908Z",
+                        "updatedAt": "2024-11-02T19:01:13.908Z"
+                      },
+                      {
+                        "id": 10,
+                        "model": "Pajero",
+                        "brand": "Mitsubishi",
+                        "year": 2021,
+                        "number": "B2324YZA",
+                        "price": "45000000",
+                        "available": true,
+                        "createdBy": "Admin",
+                        "lastUpdatedBy": "Admin",
+                        "deletedBy": null,
+                        "deletedAt": null,
+                        "createdAt": "2024-11-02T19:01:13.908Z",
+                        "updatedAt": "2024-11-02T19:01:13.908Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/{id}": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Get Car By Id",
+        "description": "Gets single data car using its unique ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "357"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"165-7q/yGZoWDGKegrQFjeD5WX02B58\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 20:17:53 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success get car with id : 1",
+                  "isSuccess": true,
+                  "data": {
+                    "car": {
+                      "id": 1,
+                      "model": "Civic",
+                      "brand": "Honda",
+                      "year": 2019,
+                      "number": "B1234XYZ",
+                      "price": "20000000",
+                      "available": true,
+                      "createdBy": "Admin",
+                      "lastUpdatedBy": "Admin",
+                      "deletedBy": null,
+                      "deletedAt": null,
+                      "createdAt": "2024-11-02T19:01:13.908Z",
+                      "updatedAt": "2024-11-02T19:01:13.908Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "63"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"3f-NVuB0SG/9ekfzfigkVADzZLg9zo\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 20:18:48 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "Car not found",
+                  "isSuccess": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/create": {
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Create Car",
+        "description": "Allows admin and super admin to add a new car to the inventory.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "model": "Becak",
+                  "brand": "Race car",
+                  "year": 2023,
+                  "number": "P 5367 GI",
+                  "price": 10000000,
+                  "available": true
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "354"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"162-MavPizoKMRehFAwQizo9dZIqeWw\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 22:00:37 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success create car",
+                  "isSusccess": true,
+                  "data": {
+                    "car": {
+                      "id": 12,
+                      "model": "Becak",
+                      "brand": "Race car",
+                      "year": 2023,
+                      "number": "P 5367 GI",
+                      "price": "10000000",
+                      "available": true,
+                      "createdBy": "Admin",
+                      "lastUpdatedBy": "Admin",
+                      "deletedBy": null,
+                      "deletedAt": null,
+                      "updatedAt": "2024-11-02T22:00:37.097Z",
+                      "createdAt": "2024-11-02T22:00:37.097Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "110"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"6e-ao6D0qawzzLvgiXz+sv2cqnPHBQ\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 22:07:40 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "400 - Model, Brand, Year, Number, Price and Available are required",
+                    "value": {
+                      "status": "Failed",
+                      "message": "Model, Brand, Year, Number, Price and Available are required",
+                      "isSuccess": false
+                    }
+                  },
+                  "example-1": {
+                    "summary": "400 - Minimum price is above 1,000,000",
+                    "value": {
+                      "status": "Failed",
+                      "message": "Minimum price is above 1,000,000",
+                      "isSuccess": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/update/{id}": {
+      "patch": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Update Car",
+        "description": "Enables admin and super admin to update information for an existing car.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "model": "Motor Goes",
+                  "brand": "Slow car",
+                  "year": 2023,
+                  "number": "P 5367 GI",
+                  "price": 100000,
+                  "available": true
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "364"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"16c-i8v8XsWs25+7CDmTy5H4iBzDOFM\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 22:42:10 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success update car",
+                  "isSuccess": true,
+                  "data": {
+                    "updatedCar": {
+                      "id": 3,
+                      "model": "Motor Goes",
+                      "brand": "Slow car",
+                      "year": 2023,
+                      "number": "P 5367 GI",
+                      "price": "10000000",
+                      "available": true,
+                      "createdBy": "Admin",
+                      "lastUpdatedBy": "Admin",
+                      "deletedBy": null,
+                      "deletedAt": null,
+                      "createdAt": "2024-11-02T21:45:14.897Z",
+                      "updatedAt": "2024-11-02T22:42:10.248Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "110"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"6e-ao6D0qawzzLvgiXz+sv2cqnPHBQ\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 22:43:48 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "400 - Model, Brand, Year, Number, Price and Available are required",
+                    "value": {
+                      "status": "Failed",
+                      "message": "Model, Brand, Year, Number, Price and Available are required",
+                      "isSuccess": false
+                    }
+                  },
+                  "example-1": {
+                    "summary": "400 - Minimum price is above 1,000,000",
+                    "value": {
+                      "status": "Failed",
+                      "message": "Minimum price is above 1,000,000",
+                      "isSuccess": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Delete Car",
+        "description": "Allows admin and super admin to remove a car from the system.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "68"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"44-OjpP6gzcy0tmpgB+x5sKk5vuQlI\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 23:26:34 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success delete car",
+                  "isSuccess": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "63"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"3f-NVuB0SG/9ekfzfigkVADzZLg9zo\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 23:24:59 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "Car not found",
+                  "isSuccess": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users > Super Admin"
+        ],
+        "summary": "Login",
+        "description": "Authenticates super admins, allowing access to all system functions.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "super.admin@example.com",
+                  "password": "super123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "357"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"165-X3wkNby5wsc2KLPOJdsmFl5LkT8\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 20:39:40 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success login",
+                  "isSusccess": true,
+                  "data": {
+                    "username": "SuperAdmin",
+                    "email": "super.admin@example.com",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJTdXBlckFkbWluIiwiZW1haWwiOiJzdXBlci5hZG1pbkBleGFtcGxlLmNvbSIsImlhdCI6MTczMDQ5MzU4MCwiZXhwIjoxNzMwNTc5OTgwfQ.P22ill53IFRgiZVJzpQNDzkROExtha0QDVllkQZ155M"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "69"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"45-1s5iL/2a1zyxZXJfAcANsF1qzG0\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 20:40:24 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "Password Incorrect",
+                  "isSusccess": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "69"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"45-Xv0vLiZ4uTidFQ2T7l76HFV8woc\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 20:40:48 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "messege": "User doesn't exist",
+                  "isSusccess": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/register": {
+      "post": {
+        "tags": [
+          "Users > Super Admin"
+        ],
+        "summary": "Create Admin",
+        "description": "Allows super admins to create new admin accounts.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Rifqi",
+                  "age": 22,
+                  "role": "Member",
+                  "email": "rifqi@gmail.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "158"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"9e-gn9T1OMCBj3Aqu1o3HXPWJg6ehY\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 19:03:07 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success create admin",
+                  "isSusccess": true,
+                  "data": {
+                    "username": "Rifqi 11",
+                    "age": 22,
+                    "role": "Admin",
+                    "email": "rifqi.admin@gmail.com"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "69"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"45-4wylvGdWG6ij1bMWQSKVXa+i+CM\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 19:04:37 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "400 - Email already exist",
+                    "value": {
+                      "status": "Failed",
+                      "message": "Email already exist",
+                      "isSuccess": false
+                    }
+                  },
+                  "example-1": {
+                    "summary": "400 - Password must be more than 6 char",
+                    "value": {
+                      "status": "Failed",
+                      "message": "Password must be more than 6 char",
+                      "isSuccess": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "62"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"3e-yzt8FEV1vekVgIcLoV8PVLwerm8\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 19:06:38 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "msg": "Token is missing",
+                  "isSuccess": false
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "59"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"3b-v9mEF7DgKgJHbZ9oJmdeDPZHT/c\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 19:10:01 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "msg": "Access denied",
+                  "isSuccess": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/current-user": {
+      "post": {
+        "tags": [
+          "Users > Super Admin"
+        ],
+        "summary": "Check Current User",
+        "description": "Retrieves information about the currently logged-in super admin.",
+        "requestBody": {
+          "content": {}
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "325"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"145-VL8a0yVu9I6/fknJ4p41UxQeXkM\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 23:41:47 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Token verified",
+                  "isSuccess": true,
+                  "data": {
+                    "user": {
+                      "id": 1,
+                      "name": "SuperAdmin",
+                      "age": 20,
+                      "role": "Super Admin",
+                      "email": "super.admin@example.com",
+                      "password": "$2b$10$XeCNYXvPOySXPXKmZeS80eowsycw8zBPD9q5Vis0MKdtqUqnDeP7.",
+                      "createdAt": "2024-11-02T21:45:14.887Z",
+                      "updatedAt": "2024-11-02T21:45:14.887Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "67"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"43-0DHO4OTF26qT/oFDAWKL3ZkeePI\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 23:42:08 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "invalid signature",
+                  "isSuccess": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health-check": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Health Check",
+        "description": "Verifies that the API is operational and responsive.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "79"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"4f-uqSJoWuzbr4MdwdOoC4okCYoTy8\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 19:01:51 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Application passed healtcheck",
+                  "isSuccess": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/undifined": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "On Lost",
+        "description": "Purpose unclear (may require additional details), potentially for handling lost resources or connectivity.",
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "63"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"3f-KQ3P1AThT1pSJTxFr/fxmAtpxCY\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 19:14:19 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "API not found",
+                  "isSuccess": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

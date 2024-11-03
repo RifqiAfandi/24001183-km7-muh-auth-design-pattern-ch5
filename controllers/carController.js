@@ -135,34 +135,52 @@ async function updateCar(req, res) {
             },
         });
         if (!car) {
-            res.status(404).json({
+            return res.status(404).json({
                 status: "Failed",
                 message: "Car not found",
                 isSuccess: false,
             });
-        }
+        };
+        if (!model || !brand || !year || !number || !price || !available){
+            return res.status(400).json({
+                status: "Failed",
+                message: "Model, Brand, Year, Number, Price and Available are required",
+                isSuccess: false,
+            });
+        };
+        if (price < 1000000){
+            return res.status(400).json({
+                status: "Failed",
+                message: "Minimum price is above 1,000,000",
+                isSuccess: false,
+            });
+        };
         await Car.update({
-            model, 
-            brand, 
-            year, 
-            number, 
-            price, 
-            available, 
-        });
-  
-      res.status(200).json({
-        status: "Success",
-        message: "Success update product",
-        isSuccess: true,
-        data: {
-          product: {
-            id,
-            name,
-            stock,
+            model,
+            brand,
+            year,
+            number,
             price,
-          },
-        },
-      });
+            available,
+            lastUpdatedBy: req.user.name,
+        },{
+            where: {
+                id,
+            },
+        });
+        const updatedCar = await Car.findOne({
+            where: {
+                id
+            }
+        });
+        res.status(200).json({
+            status: "Success",
+            message: "Success update car",
+            isSuccess: true,
+            data: {
+                updatedCar,
+            },
+        });
     } catch (err) {
         res.status(500).json({
             status: "Failed",
@@ -176,24 +194,31 @@ async function deleteCar(req, res) {
     try {
         const id = req.params.id;
         const car = await Car.findByPk(id);
-
         if (!car) {
             return res.status(404).json({
                 status: "Failed",
                 message: "Car not found",
                 isSuccess: false,
-                data: null,
             });
-        }
-        await car.destroy();
-
-        res.redirect("/dashboard/cars");
-    } catch (error) {
+        };
+        await car.update({
+            deletedBy: req.user.name,
+        });
+        await car.destroy({
+            where: {
+                id
+            },
+        });
+        res.status(200).json({
+            status: "Success",
+            message: "Success delete car",
+            isSuccess: true,
+        });
+    } catch (err) {
         return res.status(500).json({
-            status: "Fail",
-            message: error.message,
+            status: "Failed",
+            message: err.message,
             isSuccess: false,
-            data: null,
         });
     }
 };

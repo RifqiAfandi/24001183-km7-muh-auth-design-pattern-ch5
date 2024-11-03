@@ -1,0 +1,2232 @@
+{
+	"info": {
+		"_postman_id": "6ad7dee4-85e0-4387-bd28-a3b0225cd798",
+		"name": "Challange 5 - Auth Design Pattern",
+		"description": "This collection contains API endpoints to manage cars and handle user authentication for the Binar Academy project. It includes endpoints for managing car records, user authentication (login, registration), and user role management (Member, Admin, Super Admin). The collection is structured according to an authorization design pattern, utilizing Bearer Tokens for secure access control and to restrict access to specific endpoints based on user roles.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38718469"
+	},
+	"item": [
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "Get All Data Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/cars/",
+						"description": "Fetches a complete list of cars in the system."
+					},
+					"response": [
+						{
+							"name": "200 - Success get data all cars",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/cars/"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1476"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5c4-QL/s3Rnl0gQP0ysYtJC+GfQOe28\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 19:49:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success get data all cars\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"totalData\": 10,\n        \"totalPages\": 2,\n        \"currentPages\": 1,\n        \"cars\": [\n            {\n                \"id\": 1,\n                \"model\": \"Civic\",\n                \"brand\": \"Honda\",\n                \"year\": 2019,\n                \"number\": \"B1234XYZ\",\n                \"price\": \"20000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            },\n            {\n                \"id\": 2,\n                \"model\": \"Camry\",\n                \"brand\": \"Toyota\",\n                \"year\": 2021,\n                \"number\": \"B5678ABC\",\n                \"price\": \"30000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            },\n            {\n                \"id\": 3,\n                \"model\": \"Accord\",\n                \"brand\": \"Honda\",\n                \"year\": 2020,\n                \"number\": \"B9101DEF\",\n                \"price\": \"25000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            },\n            {\n                \"id\": 4,\n                \"model\": \"X-Trail\",\n                \"brand\": \"Nissan\",\n                \"year\": 2018,\n                \"number\": \"B1122GHI\",\n                \"price\": \"18000000\",\n                \"available\": false,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            },\n            {\n                \"id\": 5,\n                \"model\": \"Fortuner\",\n                \"brand\": \"Toyota\",\n                \"year\": 2017,\n                \"number\": \"B1314JKL\",\n                \"price\": \"35000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Available Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cars/?available=true&page=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cars",
+								""
+							],
+							"query": [
+								{
+									"key": "available",
+									"value": "true"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Retrieves only the cars that are currently available."
+					},
+					"response": [
+						{
+							"name": "200 - Success get data all cars",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/cars/?available=true&page=2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"cars",
+										""
+									],
+									"query": [
+										{
+											"key": "available",
+											"value": "true"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1218"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c2-iMXIv85LkgbLcyTvL8gcc4LAw3E\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 19:59:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success get data all cars\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"totalData\": 9,\n        \"totalPages\": 2,\n        \"currentPages\": \"2\",\n        \"cars\": [\n            {\n                \"id\": 7,\n                \"model\": \"CR-V\",\n                \"brand\": \"Honda\",\n                \"year\": 2022,\n                \"number\": \"B1718PQR\",\n                \"price\": \"40000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            },\n            {\n                \"id\": 8,\n                \"model\": \"Altis\",\n                \"brand\": \"Toyota\",\n                \"year\": 2020,\n                \"number\": \"B1920STU\",\n                \"price\": \"28000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            },\n            {\n                \"id\": 9,\n                \"model\": \"Outlander\",\n                \"brand\": \"Mitsubishi\",\n                \"year\": 2018,\n                \"number\": \"B2122VWX\",\n                \"price\": \"22000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            },\n            {\n                \"id\": 10,\n                \"model\": \"Pajero\",\n                \"brand\": \"Mitsubishi\",\n                \"year\": 2021,\n                \"number\": \"B2324YZA\",\n                \"price\": \"45000000\",\n                \"available\": true,\n                \"createdBy\": \"Admin\",\n                \"lastUpdatedBy\": \"Admin\",\n                \"deletedBy\": null,\n                \"deletedAt\": null,\n                \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n                \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Car By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cars/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cars",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Gets single data car using its unique ID."
+					},
+					"response": [
+						{
+							"name": "200 - Success get car with id : 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/cars/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "357"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"165-7q/yGZoWDGKegrQFjeD5WX02B58\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 20:17:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success get car with id : 1\",\n    \"isSuccess\": true,\n    \"data\": {\n        \"car\": {\n            \"id\": 1,\n            \"model\": \"Civic\",\n            \"brand\": \"Honda\",\n            \"year\": 2019,\n            \"number\": \"B1234XYZ\",\n            \"price\": \"20000000\",\n            \"available\": true,\n            \"createdBy\": \"Admin\",\n            \"lastUpdatedBy\": \"Admin\",\n            \"deletedBy\": null,\n            \"deletedAt\": null,\n            \"createdAt\": \"2024-11-02T19:01:13.908Z\",\n            \"updatedAt\": \"2024-11-02T19:01:13.908Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "404 - Car not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/cars/100"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-NVuB0SG/9ekfzfigkVADzZLg9zo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 20:18:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Car not found\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Car",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"model\": \"Becak\",\r\n    \"brand\": \"Race car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 10000000, \r\n    \"available\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/cars/create",
+						"description": "Allows admin and super admin to add a new car to the inventory."
+					},
+					"response": [
+						{
+							"name": "201 - Success create car",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"Becak\",\r\n    \"brand\": \"Race car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 10000000, \r\n    \"available\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/cars/create"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "354"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"162-MavPizoKMRehFAwQizo9dZIqeWw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 22:00:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success create car\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"car\": {\n            \"id\": 12,\n            \"model\": \"Becak\",\n            \"brand\": \"Race car\",\n            \"year\": 2023,\n            \"number\": \"P 5367 GI\",\n            \"price\": \"10000000\",\n            \"available\": true,\n            \"createdBy\": \"Admin\",\n            \"lastUpdatedBy\": \"Admin\",\n            \"deletedBy\": null,\n            \"deletedAt\": null,\n            \"updatedAt\": \"2024-11-02T22:00:37.097Z\",\n            \"createdAt\": \"2024-11-02T22:00:37.097Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "400 - Model, Brand, Year, Number, Price and Available are required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"\",\r\n    \"brand\": \"Race car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 10000000, \r\n    \"available\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/cars/create"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6e-ao6D0qawzzLvgiXz+sv2cqnPHBQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 22:07:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Model, Brand, Year, Number, Price and Available are required\",\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "400 - Minimum price is above 1,000,000",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"Becak\",\r\n    \"brand\": \"Race car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 100000, \r\n    \"available\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/cars/create"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-yOAdQjJQWq15G6dXfPW6YCcxx30\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 22:11:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Minimum price is above 1,000,000\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Car",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"model\": \"Motor Goes\",\r\n    \"brand\": \"Slow car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 100000, \r\n    \"available\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cars/update/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cars",
+								"update",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Enables admin and super admin to update information for an existing car."
+					},
+					"response": [
+						{
+							"name": "200 - Success update car",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"Motor Goes\",\r\n    \"brand\": \"Slow car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 10000000, \r\n    \"available\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/cars/update/3"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "364"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16c-i8v8XsWs25+7CDmTy5H4iBzDOFM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 22:42:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success update car\",\n    \"isSuccess\": true,\n    \"data\": {\n        \"updatedCar\": {\n            \"id\": 3,\n            \"model\": \"Motor Goes\",\n            \"brand\": \"Slow car\",\n            \"year\": 2023,\n            \"number\": \"P 5367 GI\",\n            \"price\": \"10000000\",\n            \"available\": true,\n            \"createdBy\": \"Admin\",\n            \"lastUpdatedBy\": \"Admin\",\n            \"deletedBy\": null,\n            \"deletedAt\": null,\n            \"createdAt\": \"2024-11-02T21:45:14.897Z\",\n            \"updatedAt\": \"2024-11-02T22:42:10.248Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "400 - Model, Brand, Year, Number, Price and Available are required",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"\",\r\n    \"brand\": \"Slow car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 10000000, \r\n    \"available\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/cars/update/3"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6e-ao6D0qawzzLvgiXz+sv2cqnPHBQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 22:43:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Model, Brand, Year, Number, Price and Available are required\",\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "400 - Minimum price is above 1,000,000",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"Motor Goes\",\r\n    \"brand\": \"Slow car\", \r\n    \"year\": 2023, \r\n    \"number\": \"P 5367 GI\", \r\n    \"price\": 100000, \r\n    \"available\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/cars/update/3"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-yOAdQjJQWq15G6dXfPW6YCcxx30\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 22:44:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Minimum price is above 1,000,000\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Car",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cars/delete/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cars",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Allows admin and super admin to remove a car from the system."
+					},
+					"response": [
+						{
+							"name": "200 - Success delete car",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}/cars/delete/3"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-OjpP6gzcy0tmpgB+x5sKk5vuQlI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:26:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success delete car\",\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "404 - Car not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}/cars/delete/1"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-NVuB0SG/9ekfzfigkVADzZLg9zo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:24:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Car not found\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				}
+			],
+			"description": "Cars endpoints in this folder are designed for car data management."
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Login - Member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user1@example.com\",\r\n    \"password\": \"user123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/login",
+						"description": "Authenticates members, allowing them to log in to the system."
+					},
+					"response": [
+						{
+							"name": "200 - Success login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"user1@example.com\",\r\n    \"password\": \"user123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "331"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14b-rVAqayOEyPmmIs9b2U9RCV6wJjc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 19:25:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success login\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"username\": \"User1\",\n        \"email\": \"user1@example.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJVc2VyMSIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzA0ODkxMTMsImV4cCI6MTczMDU3NTUxM30.-qXh8hDwClOrg1m5sReLpoDik3TgWOndGBB5MRgOzVQ\"\n    }\n}"
+						},
+						{
+							"name": "401 - Password Incorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"user1@example.com\",\r\n    \"password\": \"user1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-1s5iL/2a1zyxZXJfAcANsF1qzG0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 19:27:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Password Incorrect\",\n    \"isSusccess\": false\n}"
+						},
+						{
+							"name": "404 - User doesn't exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"user12@example.com\",\r\n    \"password\": \"user123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-Xv0vLiZ4uTidFQ2T7l76HFV8woc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 19:26:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"messege\": \"User doesn't exist\",\n    \"isSusccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Register - Member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Rifqi\",\r\n            \"age\": 22,\r\n            \"role\": \"Member\",\r\n            \"email\": \"rifqi@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/register",
+						"description": "Enables new users to sign up and create a member account."
+					},
+					"response": [
+						{
+							"name": "201 - Success Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/register"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "146"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"92-3SxueP65BEF+X4Qls8MscwtF1NQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 19:57:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success Register\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"username\": \"Rifqi\",\n        \"age\": 22,\n        \"role\": \"Member\",\n        \"email\": \"rifqi@gmail.com\"\n    }\n}"
+						},
+						{
+							"name": "400 - Email already exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-4wylvGdWG6ij1bMWQSKVXa+i+CM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:01:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Email already exist\",\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "400 - Password must be more than 6 char",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi123@gmail.com\",\r\n            \"password\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53-mXIY6/C6NO7czTkVGf4mkc6QZew\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:06:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Password must be more than 6 char\",\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "500 - Validation error: Name cannot be empty",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqizz@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/register"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "89"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"59-pe/IVrQGJMUvLDo/ZiD1MgwKq9A\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:31:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Validation error: Name cannot be empty\",\n    \"isSusccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Current User - Member",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{base_url}}/users/current-user",
+						"description": "Retrieves information about the currently logged-in member using their Bearer Token."
+					},
+					"response": [
+						{
+							"name": "200 - Token verified",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}/users/current-user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "309"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"135-BCVx2W8WarY7liOVLtQwimI7uho\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:35:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Token verified\",\n    \"isSuccess\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 3,\n            \"name\": \"User1\",\n            \"age\": 20,\n            \"role\": \"Member\",\n            \"email\": \"user1@example.com\",\n            \"password\": \"$2b$10$RyNJLVbPAPrg5WXOBJvG6uwP9DS94lfbP3ly1EaFRImoQTUFpN.iS\",\n            \"createdAt\": \"2024-11-02T21:45:14.887Z\",\n            \"updatedAt\": \"2024-11-02T21:45:14.887Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "500 - invalid signature",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}/users/current-user"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-0DHO4OTF26qT/oFDAWKL3ZkeePI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:36:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"invalid signature\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Login - Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/login",
+						"description": "Authenticates admin users, allowing them to access admin-specific functions."
+					},
+					"response": [
+						{
+							"name": "200 - Success login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "331"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14b-/8fqpbD7tjFkLy2ttC36IlMbY7Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:35:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success login\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"username\": \"Admin\",\n        \"email\": \"admin@example.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MzA0OTMzMzAsImV4cCI6MTczMDU3OTczMH0.rIWtPzT3cSnT70G0BWb0da_dtnOZBevi0Y9jKSM6jt0\"\n    }\n}"
+						},
+						{
+							"name": "401 - Password Incorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"admin1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-1s5iL/2a1zyxZXJfAcANsF1qzG0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:36:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Password Incorrect\",\n    \"isSusccess\": false\n}"
+						},
+						{
+							"name": "404 - User doesn't exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin1@example.com\",\r\n    \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-Xv0vLiZ4uTidFQ2T7l76HFV8woc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:36:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"messege\": \"User doesn't exist\",\n    \"isSusccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Current User - Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{base_url}}/users/current-user",
+						"description": "Retrieves information about the currently logged-in admin."
+					},
+					"response": [
+						{
+							"name": "200 - Token verified",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}/users/current-user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"134-XrhHBU9dNBjJXU1UveSbX2fOG3U\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:40:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Token verified\",\n    \"isSuccess\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Admin\",\n            \"age\": 20,\n            \"role\": \"Admin\",\n            \"email\": \"admin@example.com\",\n            \"password\": \"$2b$10$B30ZFRTilOGPeHiwkVz2JOUknwEJg7s2gVycl1ca1t2CSf1lTcjLi\",\n            \"createdAt\": \"2024-11-02T21:45:14.887Z\",\n            \"updatedAt\": \"2024-11-02T21:45:14.887Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "500 - invalid signature",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}/users/current-user"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-0DHO4OTF26qT/oFDAWKL3ZkeePI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:40:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"invalid signature\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Login - Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"super123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/login",
+						"description": "Authenticates super admins, allowing access to all system functions."
+					},
+					"response": [
+						{
+							"name": "200 - Success login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"super123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "357"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"165-X3wkNby5wsc2KLPOJdsmFl5LkT8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:39:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success login\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"username\": \"SuperAdmin\",\n        \"email\": \"super.admin@example.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJTdXBlckFkbWluIiwiZW1haWwiOiJzdXBlci5hZG1pbkBleGFtcGxlLmNvbSIsImlhdCI6MTczMDQ5MzU4MCwiZXhwIjoxNzMwNTc5OTgwfQ.P22ill53IFRgiZVJzpQNDzkROExtha0QDVllkQZ155M\"\n    }\n}"
+						},
+						{
+							"name": "401 - Password Incorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"super1213\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-1s5iL/2a1zyxZXJfAcANsF1qzG0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:40:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Password Incorrect\",\n    \"isSusccess\": false\n}"
+						},
+						{
+							"name": "404 - User doesn't exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"super.admin1@example.com\",\r\n    \"password\": \"super123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/login"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-Xv0vLiZ4uTidFQ2T7l76HFV8woc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 20:40:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"messege\": \"User doesn't exist\",\n    \"isSusccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Admin - Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Rifqi\",\r\n            \"age\": 22,\r\n            \"role\": \"Member\",\r\n            \"email\": \"rifqi@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/register",
+						"description": "Allows super admins to create new admin accounts."
+					},
+					"response": [
+						{
+							"name": "200 - Success create admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi 11\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi.admin@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/create-admin"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "158"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9e-gn9T1OMCBj3Aqu1o3HXPWJg6ehY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 19:03:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Success create admin\",\n    \"isSusccess\": true,\n    \"data\": {\n        \"username\": \"Rifqi 11\",\n        \"age\": 22,\n        \"role\": \"Admin\",\n        \"email\": \"rifqi.admin@gmail.com\"\n    }\n}"
+						},
+						{
+							"name": "400 - Email already exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi 11\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi.admin@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/create-admin"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-4wylvGdWG6ij1bMWQSKVXa+i+CM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 19:04:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Email already exist\",\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "400 - Password must be more than 6 char",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi 11\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi.admin1@gmail.com\",\r\n            \"password\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/create-admin"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53-mXIY6/C6NO7czTkVGf4mkc6QZew\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 19:05:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"Password must be more than 6 char\",\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "401 - Token is missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi 11\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi.admin1@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/create-admin"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-yzt8FEV1vekVgIcLoV8PVLwerm8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 19:06:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"msg\": \"Token is missing\",\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "403 - Access denied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Rifqi 11\",\r\n            \"age\": 22,\r\n            \"email\": \"rifqi.admin12@gmail.com\",\r\n            \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/users/create-admin"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3b-v9mEF7DgKgJHbZ9oJmdeDPZHT/c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 19:10:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"msg\": \"Access denied\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Current User - Super Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{base_url}}/users/current-user",
+						"description": "Retrieves information about the currently logged-in super admin."
+					},
+					"response": [
+						{
+							"name": "200 - Token verified",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}/users/current-user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"145-VL8a0yVu9I6/fknJ4p41UxQeXkM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:41:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Token verified\",\n    \"isSuccess\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"SuperAdmin\",\n            \"age\": 20,\n            \"role\": \"Super Admin\",\n            \"email\": \"super.admin@example.com\",\n            \"password\": \"$2b$10$XeCNYXvPOySXPXKmZeS80eowsycw8zBPD9q5Vis0MKdtqUqnDeP7.\",\n            \"createdAt\": \"2024-11-02T21:45:14.887Z\",\n            \"updatedAt\": \"2024-11-02T21:45:14.887Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "500 - invalid signature",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}/users/current-user"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-0DHO4OTF26qT/oFDAWKL3ZkeePI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Nov 2024 23:42:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"invalid signature\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/health-check",
+						"description": "Verifies that the API is operational and responsive."
+					},
+					"response": [
+						{
+							"name": "200 - Application passed healtcheck",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/health-check"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-uqSJoWuzbr4MdwdOoC4okCYoTy8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 19:01:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Application passed healtcheck\",\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "On Lost",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/undifined",
+						"description": "Purpose unclear (may require additional details), potentially for handling lost resources or connectivity."
+					},
+					"response": [
+						{
+							"name": "404 - API not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/undifined"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-KQ3P1AThT1pSJTxFr/fxmAtpxCY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 19:14:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed\",\n    \"message\": \"API not found\",\n    \"isSuccess\": false\n}"
+						}
+					]
+				}
+			],
+			"description": "System-level endpoints to perform general health checks and handle other system-wide operations."
+		}
+	]
+}

@@ -3,7 +3,6 @@ require('dotenv').config();
 const bcrypt = require("bcrypt")
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
-const { where } = require('sequelize');
 
 const register = async (req, res, next) => {
     const { name, age, role, email, password} = req.body;
@@ -156,8 +155,28 @@ const createAdmin = async (req, res) => {
     }
 };
 
+const currentUser = async (req, res) => {
+    try {
+        const user = req.user;
+        res.status(200).json({
+            status: "Success",
+            message: "Token verified",
+            isSuccess: true,
+            data: {
+                user
+            }
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
+    }
+};
+
 module.exports = {
     register,
     login,
     createAdmin,
+    currentUser,
 };

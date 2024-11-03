@@ -6,6 +6,7 @@ const { auth } = require("../middleware/authenticate");
 router.get("/", carController.getAllCars);
 router.get("/:id", carController.getCarbyId);
 router.post("/create", auth(["Admin","Super Admin"]), carController.createCar);
-router.post("/update", auth(["Admin","Super Admin"]), carController.updateCar);
+router.patch("/update/:id", auth(["Admin","Super Admin"]), carController.updateCar);
+router.delete("/delete/:id", auth(["Admin","Super Admin"]), carController.deleteCar);
 
 module.exports = router;
